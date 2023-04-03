@@ -546,7 +546,7 @@
     (property "Reference" "C1" (at 103.251 92.0663 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "10u" (at 103.251 93.9873 0)
+    (property "Value" "100n" (at 103.251 93.9873 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" (at 101.2952 96.52 0)
