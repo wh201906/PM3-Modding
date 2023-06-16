@@ -1,0 +1,188 @@
+
+(kicad_symbol_lib (version 20211014) (generator kicad_symbol_editor)
+  (symbol "N76E003AT20" (pin_names (offset 1.016)) (in_bom yes) (on_board yes)
+    (property "Reference" "U" (id 0) (at -35.8507 21.1036 0)
+      (effects (font (size 1.27 1.27)) (justify bottom left))
+    )
+    (property "Value" "N76E003AT20" (id 1) (at -35.5898 -22.8792 0)
+      (effects (font (size 1.27 1.27)) (justify bottom left))
+    )
+    (property "Footprint" "SOP65P640X120-20N" (id 2) (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (justify bottom) hide)
+    )
+    (property "PARTREV" "1.04" (id 4) (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (justify bottom) hide)
+    )
+    (property "STANDARD" "IPC 7351B" (id 5) (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (justify bottom) hide)
+    )
+    (property "MANUFACTURER" "NUVOTON" (id 6) (at 0 0 0)
+      (effects (font (size 1.27 1.27)) (justify bottom) hide)
+    )
+    (symbol "N76E003AT20_0_0"
+      (rectangle (start -35.56 -20.32) (end 35.56 20.32)
+        (stroke (width 0.254)) (fill (type background))
+      )
+      (pin bidirectional line (at -40.64 -2.54 0) (length 5.08)
+        (name "P0.5/PWM2/IC6/T0/AIN4"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "1"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin bidirectional line (at -40.64 -5.08 0) (length 5.08)
+        (name "P0.6/TXD/AIN3"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "2"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin bidirectional line (at -40.64 -7.62 0) (length 5.08)
+        (name "P0.7/RXD/AIN2"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "3"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin bidirectional line (at -40.64 -12.7 0) (length 5.08)
+        (name "P2.0/~{RST~{}"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "4"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin bidirectional line (at 40.64 -12.7 180.0) (length 5.08)
+        (name "P3.0/~{INT0~{/OSCIN/AIN1}"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "5"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin bidirectional line (at 40.64 -7.62 180.0) (length 5.08)
+        (name "P1.7/~{INT1~{/AIN0}"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "6"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin power_in line (at 40.64 -17.78 180.0) (length 5.08)
+        (name "GND"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "7"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin bidirectional line (at 40.64 -5.08 180.0) (length 5.08)
+        (name "P1.6/[SDA]/TXD_1/ICPDA/OCDDA"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "8"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin power_in line (at 40.64 17.78 180.0) (length 5.08)
+        (name "VDD"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "9"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin bidirectional line (at 40.64 -2.54 180.0) (length 5.08)
+        (name "P1.5/PWM5/IC7/~{SS~{}"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "10"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin bidirectional line (at 40.64 0.0 180.0) (length 5.08)
+        (name "P1.4/SDA/FB/PWM1"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "11"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin bidirectional line (at 40.64 2.54 180.0) (length 5.08)
+        (name "P1.3/SCL/[STADC]"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "12"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin bidirectional line (at 40.64 5.08 180.0) (length 5.08)
+        (name "P1.2/PWM0/IC0"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "13"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin bidirectional line (at 40.64 7.62 180.0) (length 5.08)
+        (name "P1.1/PWM1/IC1/AIN7/CLO"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "14"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin bidirectional line (at 40.64 10.16 180.0) (length 5.08)
+        (name "P1.0/PWM2/IC2/SPCLK"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "15"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin bidirectional line (at -40.64 10.16 0) (length 5.08)
+        (name "P0.0/PWM3/IC3/MOSI/T1"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "16"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin bidirectional line (at -40.64 7.62 0) (length 5.08)
+        (name "P0.1/PWM4/IC4/MISO"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "17"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin bidirectional line (at -40.64 5.08 0) (length 5.08)
+        (name "P0.2/ICPCK/OCDCK/RXD_1/[SCL]"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "18"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin bidirectional line (at -40.64 2.54 0) (length 5.08)
+        (name "P0.3/PWM5/IC5/AIN6"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "19"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+      (pin bidirectional line (at -40.64 0.0 0) (length 5.08)
+        (name "P0.4/AIN5/STADC/PWM3/IC3"
+          (effects (font (size 1.016 1.016)))
+        )
+        (number "20"
+          (effects (font (size 1.016 1.016)))
+        )
+      )
+    )
+  )
+)
