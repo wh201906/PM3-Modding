@@ -1,0 +1,1 @@
+void Timer0_Delay10ms(UINT8 u8CNT);
