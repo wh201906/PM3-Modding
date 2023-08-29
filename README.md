@@ -2,10 +2,12 @@
 
 ## PM3_Flash
 Add external SPI flash to the PM3 Easy  
+[Schematic](./PM3_Flash/hardware/PM3_Flash-schematic.pdf)  
 <img src="pictures/PM3_Flash.png"  width="30%" height="30%">  <img src="pictures/PM3_Flash_back.png"  width="30%" height="30%">  
 
 ## PM3_ISO7816
 Add smartcard module to the PM3 Easy  
+[Schematic](./PM3_ISO7816/hardware/PM3_ISO7816-schematic.pdf)  
 <img src="pictures/PM3_ISO7816.png"  width="30%" height="30%">  <img src="pictures/PM3_ISO7816_back.png"  width="30%" height="30%">  
 
 ## PM3_USB2TCP
