@@ -8,8 +8,7 @@ This modding only contains the firmware of ESP32-S3, and it should work on most 
 2. You need ESP-IDF to compile this project
 3. The ESP32-S3 will work as a soft-AP. The SSID and password are defined in [PM3_Modding/PM3_USB2TCP/firmware/main/wifi.h](./firmware/main/wifi.h)
 4. The default IP address of ESP32-S3 is `192.168.4.1`(soft-AP mode). The server port is defined in [PM3_Modding/PM3_USB2TCP/firmware/main/tcp-server.h](./firmware/main/tcp-server.h)
-5. ESP32-S3 only has Bluetooth BLE, so it cannot work like the "Blue Shark" Bluetooth / Battery add-on(HC-06).
-6. ESP32-S2 also has the USB-Host peripheral, so it should also works.
+5. ESP32-S2 also has the USB-Host peripheral, so it should also works.
 
 # Hardware Connection
 
