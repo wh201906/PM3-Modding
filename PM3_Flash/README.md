@@ -1,6 +1,6 @@
 # PM3 Flash
 
-Add the external SPI flash to the Proxmark3 Easy, to unlock all of the sandalone modes.  
+Add the external SPI flash to the Proxmark3 Easy, to unlock all of the standalone modes.  
 
 # Tips:
 1. Some of the new Proxmark3 Easy has already intergrated an external SPI flash. If you know how to flash the firmware to the Proxmark3 Easy, you can try to flash a SPI flash enabled firmware to test if the external flash exists.
