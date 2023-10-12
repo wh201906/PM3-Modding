@@ -92,7 +92,9 @@ static inline char* get_clients_address(struct sockaddr_storage *source_addr)
 
 static void tcp_server_task(void *pvParameters)
 {
-    static char rx_buffer[128];
+    // old frame: cmd(8) + arg(24) + data(512) = 544 bytes
+    // new frame: magic(4) + len&ng(2) + (status(2)) + cmd(2) + data(512) + crc(2) = 524 bytes
+    static char rx_buffer[544 * 2 + 1];
     static const char *TAG = "nonblocking-socket-server";
     SemaphoreHandle_t *server_ready = pvParameters;
     struct addrinfo hints = { .ai_socktype = SOCK_STREAM };
@@ -202,10 +204,16 @@ static void tcp_server_task(void *pvParameters)
                     close(sock[i]);
                     sock[i] = INVALID_SOCK;
                 } else if (len > 0) {
-                    // Received some data -> echo back
                     ESP_LOGI(TAG, "[sock=%d]: Received %d", sock[i], len);
-                    ESP_ERROR_CHECK(cdc_acm_host_data_tx_blocking(cdc_dev, (uint8_t*)rx_buffer, len, 200));
-
+                    uint8_t* ptr = (uint8_t *)rx_buffer;
+                    while (len > 0)
+                    {
+                        int packet_len = len < USB_HOST_OUT_BUFFER_SIZE ? len : USB_HOST_OUT_BUFFER_SIZE;
+                        ESP_LOGI(TAG, "Sending to USB: %d, %d", packet_len, len);
+                        ESP_ERROR_CHECK(cdc_acm_host_data_tx_blocking(cdc_dev, ptr, packet_len, 200));
+                        len -= packet_len;
+                        ptr += packet_len;
+                    }
                 }
 
             } // one client's socket

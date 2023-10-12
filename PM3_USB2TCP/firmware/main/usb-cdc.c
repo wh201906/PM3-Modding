@@ -68,7 +68,7 @@ esp_err_t usb_cdc_open(uint16_t vid, uint16_t pid, cdc_acm_dev_hdl_t *cdc_hdl_re
     ESP_LOGI(TAG_USB, "Opening CDC ACM device 0x%04X:0x%04X", vid, pid);
     const cdc_acm_host_device_config_t dev_config = {
         .connection_timeout_ms = 5000,
-        .out_buffer_size = 64,
+        .out_buffer_size = USB_HOST_OUT_BUFFER_SIZE,
         .user_arg = NULL,
         .event_cb = usb_handle_event,
         .data_cb = usb_handle_rx};
