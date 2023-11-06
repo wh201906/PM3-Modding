@@ -29,7 +29,7 @@
 #define YIELD_TO_ALL_MS 50
 
 #define UDP_SERVER_BIND_ADDRESS "0.0.0.0"
-#define UDP_SERVER_BIND_PORT 3344
+#define UDP_SERVER_BIND_PORT 18888
 
 // https://docs.espressif.com/projects/esp-idf/en/release-v5.0/esp32s3/api-guides/lwip.html#limitations
 // "Applications sending a high volume of UDP datagrams who don’t wish for any to be dropped by the sender should check for this error code and re-send the datagram after a short delay."

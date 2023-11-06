@@ -29,7 +29,7 @@
 #define YIELD_TO_ALL_MS 50
 
 #define TCP_SERVER_BIND_ADDRESS "0.0.0.0"
-#define TCP_SERVER_BIND_PORT "3344"
+#define TCP_SERVER_BIND_PORT "18888"
 
 void tcp_server_init();
 int socket_send(const char *tag, const int sock, const char *data, const size_t len);
