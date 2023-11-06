@@ -1,0 +1,9 @@
+# https://github.com/espressif/esp-idf-template/blob/master/.gitignore
+build/
+sdkconfig
+sdkconfig.old
+
+.vscode/
+trace/
+managed_components/
+dependencies.lock
