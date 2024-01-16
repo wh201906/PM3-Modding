@@ -19,4 +19,4 @@ Add the smartcard module to the Proxmark3 Easy.
 | GND    | GND  |
 
 Please refer to the datasheet of AT91SAM7Sxxx to find the physical position of these pins.  
-For some of the old Proxmark3 Easy, the PA1 pin is exported near the JTAG pins. You only need to jump 2 wires(PA5, PA7) to the MCU directly.
+For some of the old Proxmark3 Easy, the PA1 pin is exported near the JTAG pins. You only need to jump 2 wires(PA5, PA7) to the MCU directly.  
