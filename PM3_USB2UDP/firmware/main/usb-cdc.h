@@ -4,7 +4,8 @@
 #include "usb/cdc_acm_host.h"
 
 #define USB_HOST_PRIORITY 20
-#define USB_HOST_OUT_BUFFER_SIZE 256
+#define USB_HOST_OUT_BUFFER_SIZE 1024
+#define USB_HOST_IN_BUFFER_SIZE 1024
 
 static const char *TAG_USB = "USB-CDC";
 

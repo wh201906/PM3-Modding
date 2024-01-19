@@ -96,7 +96,7 @@ static void udp_server_task(void *pvParameters)
 #endif
 
         while (1) {
-            ESP_LOGI(TAG, "Waiting for data");
+            printf("Waiting for data\n");
 #if defined(CONFIG_LWIP_NETBUF_RECVINFO) && !defined(CONFIG_EXAMPLE_IPV6)
             int len = recvmsg(sock, &msg, 0);
 #else
@@ -133,7 +133,7 @@ static void udp_server_task(void *pvParameters)
                     while (len > 0)
                     {
                         int packet_len = len < USB_HOST_OUT_BUFFER_SIZE ? len : USB_HOST_OUT_BUFFER_SIZE;
-                        ESP_LOGI(TAG, "Sending to USB: %d, %d", packet_len, len);
+                        printf("Net->USB: %d/%d\n", packet_len, len);
                         ESP_ERROR_CHECK(cdc_acm_host_data_tx_blocking(cdc_dev, ptr, packet_len, 200));
                         len -= packet_len;
                         ptr += packet_len;
