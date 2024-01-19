@@ -6,6 +6,7 @@
 #include "esp_event.h"
 #include "esp_log.h"
 
+#include <netdb.h>
 #include "lwip/err.h"
 #include "lwip/sys.h"
 
@@ -21,13 +22,38 @@ static EventGroupHandle_t s_wifi_sta_event_group;
 #define WIFI_STA_FAIL_BIT      BIT1
 
 static int s_retry_num = 0;
+static esp_netif_t *netif_wifi_sta = NULL;
 
+static void wifi_sta_set_static_ip(esp_netif_t *netif)
+{
+    if (esp_netif_dhcpc_stop(netif) != ESP_OK) {
+        ESP_LOGE(TAG_WIFI, "Failed to stop DHCP client");
+        return;
+    }
+    esp_netif_ip_info_t ip;
+    memset(&ip, 0 , sizeof(esp_netif_ip_info_t));
+    ip.ip.addr = ipaddr_addr(WIFI_STA_STATIC_IP_ADDR);
+    ip.netmask.addr = ipaddr_addr(WIFI_STA_STATIC_NETMASK_ADDR);
+    ip.gw.addr = ipaddr_addr(WIFI_STA_STATIC_GATEWAY_ADDR);
+    if (esp_netif_set_ip_info(netif, &ip) != ESP_OK) {
+        ESP_LOGE(TAG_WIFI, "Failed to set IP info");
+        return;
+    }
+    ESP_LOGD(TAG_WIFI, "Success to set static ip: %s, netmask: %s, gw: %s", WIFI_STA_STATIC_IP_ADDR, WIFI_STA_STATIC_NETMASK_ADDR, WIFI_STA_STATIC_GATEWAY_ADDR);
+}
 
-static void wifi_sta_event_handler(void* arg, esp_event_base_t event_base,
-                                int32_t event_id, void* event_data)
+static void wifi_sta_event_handler(void* arg, esp_event_base_t event_base, int32_t event_id, void* event_data)
 {
     if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_START) {
+        s_retry_num = 0;
         esp_wifi_connect();
+    } else if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_CONNECTED) {
+        ;
+#ifdef WIFI_STA_STATIC_IP_ADDR
+        if (strlen(WIFI_STA_STATIC_IP_ADDR) > 0) {
+            wifi_sta_set_static_ip(netif_wifi_sta);
+        }
+#endif
     } else if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_DISCONNECTED) {
         if (s_retry_num < WIFI_STA_MAX_RETRY) {
             esp_wifi_connect();
@@ -50,7 +76,7 @@ void wifi_init_sta(void)
     s_wifi_sta_event_group = xEventGroupCreate();
 
     ESP_ERROR_CHECK(esp_netif_init());
-    esp_netif_create_default_wifi_sta();
+    netif_wifi_sta = esp_netif_create_default_wifi_sta();
 
     wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
     ESP_ERROR_CHECK(esp_wifi_init(&cfg));
@@ -86,11 +112,8 @@ void wifi_init_sta(void)
     /* xEventGroupWaitBits() returns the bits before the call returned, hence we can test which event actually
      * happened. */
     if (bits & WIFI_STA_CONNECTED_BIT) {
-        ESP_LOGI(TAG_WIFI, "connected to ap SSID:%s password:%s",
-                 WIFI_SSID, WIFI_PWD);
-    } else if (bits & WIFI_STA_FAIL_BIT) {
-        ESP_LOGI(TAG_WIFI, "Failed to connect to SSID:%s, password:%s",
-                 WIFI_SSID, WIFI_PWD);
+        ESP_LOGI(TAG_WIFI, "connected to ap SSID:%s password:%s", WIFI_SSID, WIFI_PWD);
+    } else if (bits & WIFI_STA_FAIL_BIT) { WIFI_SSID, WIFI_PWD);
     } else {
         ESP_LOGE(TAG_WIFI, "UNEXPECTED EVENT");
     }
