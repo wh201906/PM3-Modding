@@ -25,7 +25,7 @@
 #include "lwip/sys.h"
 #include <lwip/netdb.h>
 
-static const char *TAG = "example";
+static const char *TAG = "Server";
 
 struct sockaddr_storage source_addr; // Large enough for both IPv4 or IPv6
 socklen_t socklen = sizeof(source_addr);
@@ -168,8 +168,9 @@ int socket_send(const char *tag, const int sock, const char *data, const size_t 
         err = sendto(sock, data, len, 0, (struct sockaddr *)&source_addr, sizeof(source_addr));
         if (err < 0) {
             ESP_LOGE(tag, "Error occurred during sending: errno %d", errno);
-            if (errno == ENOMEM)
+            if (errno == ENOMEM) {
                 continue;
+            }
         }
         break;
     }

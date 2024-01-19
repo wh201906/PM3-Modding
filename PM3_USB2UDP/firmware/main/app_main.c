@@ -27,7 +27,9 @@ void app_main(void)
 
     ESP_ERROR_CHECK(esp_event_loop_create_default());
 
-    wifi_init_softap();
+    wifi_init_softap(); // Create a Wifi AP
+    // wifi_init_sta(); // Connect to a Wifi AP
+
     int8_t wifi_power;
     // ESP_ERROR_CHECK(esp_wifi_set_max_tx_power(8));
     ESP_ERROR_CHECK(esp_wifi_get_max_tx_power(&wifi_power));
