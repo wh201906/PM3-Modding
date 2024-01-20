@@ -1,0 +1,58 @@
+name: USB Bridge Firmware CI
+
+on:
+  push:
+    paths:
+      - 'PM3_USB2TCP/firmware/*'
+      - 'PM3_USB2UDP/firmware/*'
+      - '.github/workflows/*'
+  pull_request:
+    paths:
+      - 'PM3_USB2TCP/firmware/*'
+      - 'PM3_USB2UDP/firmware/*'
+      - '.github/workflows/*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        targets: [esp32s2, esp32s3]
+        firmwares: [PM3_USB2TCP, PM3_USB2UDP]
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: ESP-IDF Build
+        uses: espressif/esp-idf-ci-action@v1
+        with:
+          esp_idf_version: v5.1.2
+          target: ${{ matrix.targets }}
+          path: ${{ matrix.firmwares }}/firmware
+
+      - name: Install Esptool
+        run: pip install esptool
+
+      - name: Merge Firmware
+        run: |
+          # Merge Firmware
+          # The ${{ matrix.firmwares }}/firmware/build is owned by root, so the script cannot create merged binary there.
+          cp --no-preserve=mode,ownership --recursive ${{ matrix.firmwares }}/firmware/build ./
+          cd build
+          esptool.py --chip ${{ matrix.targets }} merge_bin -o ${{ matrix.firmwares }}-${{ matrix.targets }}-merged.bin @flash_args
+
+      - name: Get Build Info
+        run: |
+          echo "BUILD_SHA=$(git rev-parse --short "$GITHUB_SHA")" >> "$GITHUB_ENV"
+          echo "BUILD_DATE=$(date +'%Y%m%d')" >> "$GITHUB_ENV"
+
+      - name: Upload Firmware
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.firmwares }}-${{ matrix.targets }}-${{ env.BUILD_DATE }}-${{ env.BUILD_SHA }}
+          path: |
+            build/**/*.bin
+            !build/**/CMakeFiles/
