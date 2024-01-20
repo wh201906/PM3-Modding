@@ -14,8 +14,8 @@ Add the smartcard module to the PM3 Easy
 
 ## PM3_USB2TCP
 [README](/PM3_USB2TCP/README.md)  
-Connect to PM3 hardware with TCP, using ESP32-S3 as a USB to TCP bridge  
-No need to jumping any wires to the MCU directly. It works with most of the ESP32-S3 dev boards  
+Connect to PM3 hardware with TCP, using ESP32-S3/S2 as a USB to TCP bridge  
+No need to jumping any wires to the MCU directly. It works with most of the ESP32-S3/S2 dev boards  
 
 ## PM3_USB2UDP
 [README](/PM3_USB2UDP/README.md)  
