@@ -104,11 +104,14 @@ static void udp_server_task(void *pvParameters)
 #endif
             // Error occurred during receiving
             if (len < 0) {
-                ESP_LOGE(TAG, "recvfrom failed: errno %d", errno);
-                break;
-            }
-            // Data received
-            else {
+                if (errno == EAGAIN) {
+                    ESP_LOGI(TAG, "No data available(EAGAIN)");
+                    continue;
+                } else {
+                    ESP_LOGE(TAG, "recvfrom failed: errno %d", errno);
+                    break;
+                }
+            } else {
                 // Get the sender's ip address as string
                 if (source_addr.ss_family == PF_INET) {
                     inet_ntoa_r(((struct sockaddr_in *)&source_addr)->sin_addr, addr_str, sizeof(addr_str) - 1);
@@ -139,8 +142,6 @@ static void udp_server_task(void *pvParameters)
                         ptr += packet_len;
                     }
                 }
-
-                // socket_send(TAG, sock, rx_buffer, len);
             }
         }
 
@@ -155,7 +156,6 @@ static void udp_server_task(void *pvParameters)
 
 void udp_server_init()
 {
-    ESP_ERROR_CHECK(esp_netif_init());
     xTaskCreate(udp_server_task, "udp_server", 8192, (void*)AF_INET, 5, NULL);
 }
 

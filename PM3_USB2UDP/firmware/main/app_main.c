@@ -26,6 +26,8 @@ void app_main(void)
     ESP_ERROR_CHECK(ret);
 
     ESP_ERROR_CHECK(esp_event_loop_create_default());
+    ESP_ERROR_CHECK(esp_netif_init());
+
 
     wifi_init_softap(); // Create a Wifi AP
     // wifi_init_sta(); // Connect to a Wifi AP

@@ -75,7 +75,6 @@ void wifi_init_sta(void)
 {
     s_wifi_sta_event_group = xEventGroupCreate();
 
-    ESP_ERROR_CHECK(esp_netif_init());
     netif_wifi_sta = esp_netif_create_default_wifi_sta();
 
     wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
@@ -113,7 +112,8 @@ void wifi_init_sta(void)
      * happened. */
     if (bits & WIFI_STA_CONNECTED_BIT) {
         ESP_LOGI(TAG_WIFI, "connected to ap SSID:%s password:%s", WIFI_SSID, WIFI_PWD);
-    } else if (bits & WIFI_STA_FAIL_BIT) { WIFI_SSID, WIFI_PWD);
+    } else if (bits & WIFI_STA_FAIL_BIT) {
+        ESP_LOGI(TAG_WIFI, "Failed to connect to SSID:%s, password:%s", WIFI_SSID, WIFI_PWD);
     } else {
         ESP_LOGE(TAG_WIFI, "UNEXPECTED EVENT");
     }
