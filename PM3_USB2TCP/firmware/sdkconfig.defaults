@@ -1,0 +1,7 @@
+# This file was generated using idf.py save-defconfig. It can be edited manually.
+# Espressif IoT Development Framework (ESP-IDF) Project Minimal Configuration
+#
+CONFIG_IDF_TARGET="esp32s3"
+CONFIG_ESP32_WIFI_DYNAMIC_RX_BUFFER_NUM=64
+CONFIG_ESP32_WIFI_DYNAMIC_TX_BUFFER_NUM=64
+CONFIG_LWIP_TCPIP_TASK_STACK_SIZE=8192

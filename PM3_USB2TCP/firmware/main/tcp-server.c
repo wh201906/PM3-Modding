@@ -92,10 +92,8 @@ static inline char* get_clients_address(struct sockaddr_storage *source_addr)
 
 static void tcp_server_task(void *pvParameters)
 {
-    // old frame: cmd(8) + arg(24) + data(512) = 544 bytes
-    // new frame: magic(4) + len&ng(2) + (status(2)) + cmd(2) + data(512) + crc(2) = 524 bytes
-    static char rx_buffer[544 * 2 + 1];
-    static const char *TAG = "nonblocking-socket-server";
+    static char rx_buffer[2048];
+    static const char *TAG = "Server";
     SemaphoreHandle_t *server_ready = pvParameters;
     struct addrinfo hints = { .ai_socktype = SOCK_STREAM };
     struct addrinfo *address_info;
@@ -204,12 +202,12 @@ static void tcp_server_task(void *pvParameters)
                     close(sock[i]);
                     sock[i] = INVALID_SOCK;
                 } else if (len > 0) {
-                    ESP_LOGI(TAG, "[sock=%d]: Received %d", sock[i], len);
+                    // ESP_LOGI(TAG, "[sock=%d]: Received %d", sock[i], len);
                     uint8_t* ptr = (uint8_t *)rx_buffer;
                     while (len > 0)
                     {
                         int packet_len = len < USB_HOST_OUT_BUFFER_SIZE ? len : USB_HOST_OUT_BUFFER_SIZE;
-                        ESP_LOGI(TAG, "Sending to USB: %d, %d", packet_len, len);
+                        printf("Net->USB: %d/%d\n", packet_len, len);
                         ESP_ERROR_CHECK(cdc_acm_host_data_tx_blocking(cdc_dev, ptr, packet_len, 200));
                         len -= packet_len;
                         ptr += packet_len;
@@ -240,12 +238,9 @@ error:
 
 void tcp_server_init(void)
 {
-    ESP_ERROR_CHECK(esp_netif_init());
-
     SemaphoreHandle_t server_ready = xSemaphoreCreateBinary();
     assert(server_ready);
-    xTaskCreate(tcp_server_task, "tcp_server", 4096, &server_ready, 5, NULL);
+    xTaskCreate(tcp_server_task, "tcp_server", 8192, &server_ready, 5, NULL);
     xSemaphoreTake(server_ready, portMAX_DELAY);
     vSemaphoreDelete(server_ready);
-
 }
