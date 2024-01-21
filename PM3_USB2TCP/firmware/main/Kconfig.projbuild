@@ -1,0 +1,45 @@
+menu "USB Bridge Configuration"
+    config BRIDGE_USE_CONFIG
+        bool "Override config items defined in header file"
+        default n
+        help
+            If this is set to Yes, the config items defined there will be used.
+
+    config BRIDGE_WIFI_SSID
+        depends on BRIDGE_USE_CONFIG
+        string "WiFi SSID"
+        help
+            SSID (network name) for the bridge to connect to. (station mode)
+            SSID (network name) for the Wifi AP created by the bridge. (AP mode)
+
+    config BRIDGE_WIFI_PASSWORD
+        depends on BRIDGE_USE_CONFIG
+        string "WiFi Password"
+        help
+            WiFi password for the bridge to use.
+    
+    config BRIDGE_WIFI_STA_USE_STATIC_IP
+        depends on BRIDGE_USE_CONFIG
+        bool "Use static IP address (station mode only)"
+        default n
+
+    config BRIDGE_WIFI_STA_STATIC_IP_ADDR
+        depends on BRIDGE_WIFI_STA_USE_STATIC_IP
+        string "Static IP address (station mode only)"
+        help
+            Set static IP address used in station mode.
+
+    config BRIDGE_WIFI_STA_STATIC_NETMASK_ADDR
+        depends on BRIDGE_WIFI_STA_USE_STATIC_IP
+        string "Static netmask address (station mode only)"
+        default "255.255.255.0"
+        help
+            Set static netmask address used in station mode.
+
+    config BRIDGE_WIFI_STA_STATIC_GATEWAY_ADDR
+        depends on BRIDGE_WIFI_STA_USE_STATIC_IP
+        string "Static gateway address (station mode only)"
+        help
+            Set static gateway address used in station mode.
+
+endmenu

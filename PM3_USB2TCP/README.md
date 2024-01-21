@@ -15,6 +15,7 @@ This modding only contains the firmware of ESP32-S3, and it should work on most 
     + (Optional) If it's not convenient to get the allocated IP address, you can set the static IP address in [PM3_Modding/PM3_USB2TCP/firmware/main/wifi/wifi.h](./firmware/main/wifi/wifi.h)
 5. The default IP address of ESP32-S3 is `192.168.4.1`(soft-AP mode). The server port is defined in [PM3_Modding/PM3_USB2TCP/firmware/main/tcp-server.h](./firmware/main/tcp-server.h)
 6. ESP32-S2 also has the USB-Host peripheral, so it also works. Remember to set the correct target chip in ESP-IDF.
+7. Some of the arguments mentioned above can be configured by running `idf.py menuconfig` -> `USB Bridge Configuration`.
 
 # Hardware Connection
 

@@ -3,14 +3,14 @@ name: USB Bridge Firmware CI
 on:
   push:
     paths:
-      - 'PM3_USB2TCP/firmware/*'
-      - 'PM3_USB2UDP/firmware/*'
-      - '.github/workflows/*'
+      - 'PM3_USB2TCP/firmware/**'
+      - 'PM3_USB2UDP/firmware/**'
+      - '.github/workflows/**'
   pull_request:
     paths:
-      - 'PM3_USB2TCP/firmware/*'
-      - 'PM3_USB2UDP/firmware/*'
-      - '.github/workflows/*'
+      - 'PM3_USB2TCP/firmware/**'
+      - 'PM3_USB2UDP/firmware/**'
+      - '.github/workflows/**'
   workflow_dispatch:
 
 jobs:
